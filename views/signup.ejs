@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./Partials/_Header.ejs') %>
+</head>
+<body>
+	<form class="signup needs-validation center" novalidate method="POST" action="/users/signup">
+		<h1>Kayıt Ol</h1>
+		<input type="text" class="form-control" id="username" name="username" placeholder="Kullanıcı Adı" required>
+		<input type="text" class="form-control" id="name" name="name" placeholder="İsiminizi Girin" required>
+		<input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+		<input type="password" class="form-control" id="password" name="password" placeholder="Şifre" required>
+		<button type="submit">Kayıt Ol</button>
+		<span>veya</span>
+		<a href="/login" id="regBtn" class="reg-btn">Hesabınız Var Mı?</a>
+	</form>
+	<script src="/js/validate.js"></script>
+</body>
+</html>

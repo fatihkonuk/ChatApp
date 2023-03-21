@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./Partials/_Header.ejs') %>
+</head>
+<body>
+    <form class="login needs-validation center" novalidate method="POST" action="/users/login">
+		<h1>Giriş Yap</h1>
+		
+		<input type="text" class="form-control" id="username" name="username" autocomplete="off" placeholder="Kullanıcı Adı" required>
+		<input type="password" class="form-control" id="password" name="password" placeholder="Şifre" required>
+		<button type="submit">Giriş Yap</button>
+        <span>veya</span>
+		<a href="/signup" class="reg-btn">Hesap Oluştur</a>
+	</form>
+	<script src="/js/validate.js"></script>
+</body>
+</html>

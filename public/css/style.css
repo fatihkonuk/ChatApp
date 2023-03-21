@@ -1,0 +1,255 @@
+::-webkit-scrollbar {
+    width: 4px;
+}
+::-webkit-scrollbar-track {
+    background: #252525;
+}
+::-webkit-scrollbar-thumb {
+    background: #6d6d6d;
+    border-radius: 2px;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul,li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: #fff;
+}
+html {
+    height: 100%;
+}
+body {
+    background-color: #1b1b1b;
+    background-image: url("/images/landscape.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.background-filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1b1b1b36;
+    backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+.navbar .dropdown .dropdown-menu{
+    left: -80%;
+}
+.navbar .dropdown .dropdown-menu li{
+    text-align: center;
+}
+
+/*? **********************************  */
+
+.content .box {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    height: 500px;
+    border: 1px solid black;
+}
+.content .box .header {
+    width: 100%;
+    height: 50px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    background-color: #112D4E;
+    color: #fff;
+}
+.content .box.user-list .header, .content .box.user-panel .header {
+    justify-content: center;
+}
+.content .chat-screen .screen {
+    height: 400px;
+    padding: 10px;
+    overflow: auto;
+}
+.content .chat-screen .screen #messages {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.content .chat-screen .screen .message {
+    position: relative;
+    width: max-content;
+    max-width: 200px;
+    min-width: 150px;
+    height: max-content;
+    margin-bottom: 10px;
+    padding: 7px 10px;
+    border-radius: 5px;
+    background-color: #112D4E;
+    word-wrap: break-word;
+}
+.content .chat-screen .screen .message.left {
+    align-self: flex-start;
+}
+.content .chat-screen .screen .message.right {
+    align-self: flex-end;
+}
+
+.content .chat-screen .screen .message .user-name {
+    color: orangered;
+}
+.content .chat-screen .screen .message .user-msg {
+    color: white;
+    font-weight: 300;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+.content .chat-screen .screen .message .time {
+    position: absolute;
+    right: 10px;
+    bottom: 2px;
+    color: white;
+    font-weight: 300;
+    font-size: 12px;
+}
+.content .chat-screen .screen #feedback {
+    color: #a71b1b;
+}
+
+.content .chat-screen .message-box {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #153957;
+}
+.content .chat-screen .message-box #message {
+    width: 90%;
+    height: 100%;
+    padding: 0 10px 0 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+}
+.content .chat-screen .message-box #sendBtn {
+    width: 10%;
+    height: 100%;
+    background: #112D4E;
+    border: 1px solid black;
+    outline: none;
+    transition: .25s all;
+}
+.content .chat-screen .message-box #sendBtn:hover {
+    background: #3769a1;
+}
+.content .chat-screen .message-box #sendBtn i {
+    color: #fff;
+}
+
+
+
+/*? Form */
+
+form {
+    width: 350px;
+	padding: 40px;
+    background-color: #191919;
+	border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form h1 {
+    color: white;
+	font-weight: 500;
+	text-shadow: 1px 1px 1px #2eec71;
+}
+form #feedback {
+    display: block;
+    width: 80%;
+    margin: 5px 0;
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+}
+form #feedback.error {
+    border: 1px solid #991818;
+    color: #991818;
+}
+form #feedback.success {
+    border: 1px solid #189923;
+    color: #189923;
+}
+form div {
+    text-align: center;
+}
+
+form input.form-control {
+	width: 80%;
+	margin: 10px 0;
+	padding: 12px;
+	display: block;
+	background: none;
+	border: 2px solid #3498db;
+	text-align: center;
+	border-radius: 24px;
+	outline: none;
+	color: white !important;
+	transition: 0.4s all;
+}
+form div input.form-control {
+    width: 100%;
+}
+form input.form-control::placeholder { 
+    color: #a7a7a7;
+}
+form input.form-control:focus {
+	width: 90%;
+	background: none;
+	border-color: #2eec71;
+}
+form div input.form-control:focus {
+    width: 110%;
+} 
+form button{
+	display: block;
+	background: none;
+	border: 0;
+	text-align: center;
+	margin: 10px 0;
+	margin-bottom: 8px;
+	border: 2px solid #2eec71;
+	border-radius: 24px;
+	outline: none;
+	padding: 12px 40px;
+	color: white;
+	transition: 0.25s;
+}
+form button:hover {
+	background: #2eec71;
+    color: #191919;
+}
+form span {
+    color: #fff;
+}
+form .reg-btn {
+    margin-top: 10px;
+    font-weight: 600;
+    text-decoration: underline;
+}

@@ -1,0 +1,14 @@
+<nav class="navbar navbar-dark bg-dark px-5">
+    <div class="container-fluid">
+      <a href="/" class="navbar-brand text-white">ChatApp</a>
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <%= user.name %>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+          <li><a class="dropdown-item" href="/users/<%= user.slug %>">Profile</a></li>
+          <li><a href="/users/logout"><button class="dropdown-item" onclick="setOffline()" >Logout</button></a></li>
+        </ul>
+      </div>
+    </div>
+</nav>
