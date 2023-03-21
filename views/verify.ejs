@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./Partials/_Header.ejs') %>
+</head>
+<body>
+    <form class="verify needs-validation center" novalidate method="post" action="/users/signup">
+		<h1>Email Verify</h1>
+		<input style="pointer-events: none;" type="text" id="email" class="form-control" name="email" value="<%= email %>">
+		<input type="text" id="verifyCode" class="form-control" name="verifyCode" placeholder="Kod" autocomplete="off" required>
+		<button type="submit">Send</button>
+	</form>
+	<script src="/js/validate.js"></script>
+</body>
+</html>

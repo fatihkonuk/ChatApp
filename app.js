@@ -48,16 +48,22 @@ app.use('*', (req,res,next) => {
 app.use(pageRoute);
 app.use('/users', authRoute);
 
+//* Socket.io
 io.on('connection', async socket => {
-    //! Set Socket Id
+    //* Set Socket Id
     socket.id = global.userIN;
     socket.emit('id', socket.id);
+    const user = await User.findById(socket.id);
+    if (user) {
+        user.isOnline = true;
+        await user.save();
+    }
 
-    //! Get Online Users
+    //* Get Online Users
     const users = await User.find();
     io.sockets.emit('onlineUsers', users);
 
-    //! Set Offline User
+    //* Set Offline User
     socket.on('offlineUser', async () => {
         setTimeout(async () => {
             const users = await User.find();
@@ -65,11 +71,11 @@ io.on('connection', async socket => {
         },1000);
     })
 
-    //! Get Chat History
+    //* Get Chat History
     const messages = await Message.find().sort('sendAt');
     socket.emit('chatHistory', messages);
 
-    //! Chat Data Flow
+    //* Chat Data Flow
     socket.on('chat', async data => {
         const user = await User.findById(socket.id);
         if (user) {
@@ -82,7 +88,7 @@ io.on('connection', async socket => {
         }
     })
 
-    //! Feedback Data Flow
+    //* Feedback Data Flow
     socket.on('feedback', async data => {
         const user = await User.findById(data);
         if (user) {
@@ -93,5 +99,15 @@ io.on('connection', async socket => {
         socket.broadcast.emit('clear');
     });
     
+    socket.on("disconnect", async () => {
+        const user = await User.findById(socket.id);
+        if (user) {
+            user.isOnline = false;
+            await user.save();
+        }
+        const users = await User.find();
+        io.sockets.emit('onlineUsers', users);
+    });
+
 }); 
 

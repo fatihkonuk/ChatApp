@@ -2,7 +2,7 @@ const onlineUsers = document.getElementById('online-users');
 
 const messageScreen = document.getElementById('messages');
 const feedbackScreen = document.getElementById('feedback');
-const message = document.getElementById('message');
+const messageBox = document.getElementById('message');
 const sendBtn = document.getElementById('sendBtn');
 
 const socket = io.connect('http://localhost:3000');
@@ -51,11 +51,18 @@ socket.on('chatHistory', messages => {
 });
 
 //! Chat Data Flow
+document.addEventListener('keypress', (e) => {
+    if (e.key == 'Enter') {
+        sendBtn.click();
+    }
+})
+
 sendBtn.addEventListener('click', () => {
-   socket.emit('chat', {
-    message: message.value,
-   });
-   message.value = '';
+    if (messageBox.value == '') return;
+    socket.emit('chat', {
+        message: messageBox.value,
+    });
+    messageBox.value = '';
 });
 socket.on('chat', message => {
     feedbackScreen.innerHTML = '';
@@ -75,9 +82,9 @@ socket.on('chat', message => {
 
 //! Feedback Data Flow
 message.addEventListener('input', () => {
-    if (message.value != '') {
+    if (messageBox.value != '') {
         socket.emit('feedback', socket.id);
-    }else if (message.value == ''){
+    }else if (messageBox.value == ''){
         socket.emit('clear');
     }
 });

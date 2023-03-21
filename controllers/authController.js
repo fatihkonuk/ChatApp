@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 
 const createUser = async (req,res) => {
-    await User.create(req.body);
+    await User.create(req.session.verifyUser);
     res.status(200).redirect('/login');
 }
 
@@ -23,6 +23,7 @@ const loginUser = async (req,res) => {
         res.status(400).redirect('/login');
     }
 }
+
 const logoutUser = async (req,res) => {
     const user = await User.findById(req.session.userID);
     req.session.destroy(() => {
@@ -31,10 +32,10 @@ const logoutUser = async (req,res) => {
         res.status(200).redirect('/login');
     })
 }
-const getProfilePage = async (req,res) => {
-    const user = await User.findById(req.session.userID);
-    res.render('profile', {
-        user
+
+const getVerifyPage = async (req,res) => {
+    res.render('verify', {
+        email: req.body.email
     });
 }
 
@@ -42,5 +43,5 @@ module.exports = {
     createUser,
     loginUser,
     logoutUser,
-    getProfilePage
+    getVerifyPage,
 }
