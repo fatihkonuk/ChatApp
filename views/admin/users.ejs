@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--! Header -->
+  <%- include('../partials/_Header.ejs') %>
+</head>
+<body>
+  <%- include('../partials/_Navbar.ejs') %>
+
+  <div class="container mt-5">
+    <div class="row align-items-start justify-content-around">
+      <div class="col-9" style="max-height: 400px; overflow: auto;">
+        <table class="table table-dark">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.forEach(u => { %>
+              <tr>
+                <th scope="row"><%= u._id %></th>
+                <td><%= u.name %></td>
+                <td><%= u.email %></td>
+                <td><%= u.role %></td>
+                <td>
+                  <!--! Popup Button Start -->
+                  <button type="button" class="btn btn-sm btn-warning text-white" data-toggle="modal" data-target="#updateUser<%= u._id %>">
+                    Update
+                  </button>
+                  <!--! Popup Button End -->
+                  <div class="btn btn-sm btn-danger text-white">Delete</div>
+                </td>
+              </tr>
+              <!--! Popup Modal Start -->
+              <div class="modal fade" id="updateUser<%= u._id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">User Details</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">X</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <form method="post" action="/admin/users?_method=PUT" style="all: unset;">
+                        <div class="form-group">
+                          <label for="user_id" class="col-form-label">ID:</label>
+                          <input type="text" class="form-control" id="user_id" name="user_id" value="<%= u._id %>" readonly>
+                        </div>
+                        <div class="form-group">
+                          <label for="user_name" class="col-form-label">Name:</label>
+                          <input type="text" class="form-control" id="user_name" name="user_name" value="<%= u.name %>">
+                        </div>
+                        <div class="form-group">
+                          <label for="user_role" class="col-form-label">Role:</label>
+                          <input type="text" class="form-control" id="user_role" name="user_role" value="<%= u.role %>">
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--! Popup Modal End -->
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+      <div class="col-2 bg-dark text-white p-3">
+        
+        <div class="widget-categories d-flex align-items-center justify-content-center flex-column">
+          <h3 class="mb-3" style="border-bottom: 1px solid #000;">Panel</h3>
+          <ul class="p-0 text-center">
+            <li><a href="/admin/users">Users</a></li>
+            <li><a href="/admin/messages">Messages</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ALL JS FILES -->
+  <script src="/js/all.js"></script>
+</body>

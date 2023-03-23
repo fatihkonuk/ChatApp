@@ -26,6 +26,11 @@ const UserSchema = new Schema({
         type : String,
         required: true
     },
+    role: {
+        type: String,
+        required: true,
+        default: 'none'
+    },
     isOnline: {
         type: Boolean,
         default: false,

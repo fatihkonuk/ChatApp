@@ -65,7 +65,7 @@ body {
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 500px;
+    height: max-content;
     border: 1px solid black;
 }
 .content .box .header {
@@ -252,4 +252,8 @@ form .reg-btn {
     margin-top: 10px;
     font-weight: 600;
     text-decoration: underline;
+}
+
+.widget-search * {
+    all: unset !important;
 }

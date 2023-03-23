@@ -9,5 +9,6 @@ router.post('/verify', verifyMiddleware.sendCode, authController.getVerifyPage);
 router.post('/signup', verifyMiddleware.checkCode, authController.createUser);
 router.post('/login', authController.loginUser);
 router.get('/logout', authMiddleware, authController.logoutUser);
+router.get('/:slug', authController.getProfilePage);
 
 module.exports = router;

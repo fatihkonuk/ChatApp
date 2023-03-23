@@ -8,6 +8,5 @@ const router = express.Router();
 router.get('/', authMiddleware, pageController.getHomePage);
 router.get('/login', redirectMiddleware, pageController.getLoginPage);
 router.get('/signup', redirectMiddleware, pageController.getSignupPage);
-router.get('/:slug', pageController.getProfilePage);
 
 module.exports = router;

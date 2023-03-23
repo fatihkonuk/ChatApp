@@ -5,7 +5,8 @@ const getHomePage = async (req,res) => {
     const users = await User.find();
     res.render('index', {
         user,
-        users
+        users,
+        page_name: 'chat'
     });
 }
 
@@ -17,16 +18,10 @@ const getSignupPage = (req,res) => {
     res.render('signup');
 }
 
-const getProfilePage = async (req,res) => {
-    const user = await User.findById(req.session.userID);
-    res.render('profile', {
-        user
-    });
-}
+
 
 module.exports = {
     getHomePage,
     getLoginPage,
     getSignupPage,
-    getProfilePage
 }

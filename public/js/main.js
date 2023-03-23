@@ -5,7 +5,7 @@ const feedbackScreen = document.getElementById('feedback');
 const messageBox = document.getElementById('message');
 const sendBtn = document.getElementById('sendBtn');
 
-const socket = io.connect('http://localhost:3000');
+const socket = io.connect();
 
 //! Set Socket Id
 socket.on('id', data => {
@@ -17,11 +17,19 @@ socket.on('onlineUsers', users => {
     let list = '';
     users.forEach(user => {
         let bg = user.isOnline ? '' : 'list-group-item-dark';
-        list += `
-        <li class="list-group-item ${bg}">
-            ${user.username} 
-        </li>
-        `
+        if (user.role == 'admin') {
+            list += `
+            <li class="list-group-item ${bg}">
+                ${user.username} - (Admin)
+            </li>
+            `
+        }else {
+            list += `
+            <li class="list-group-item ${bg}">
+                ${user.username}
+            </li>
+            `
+        }
     });
     onlineUsers.innerHTML = list;
 });
@@ -35,15 +43,17 @@ function setOffline() {
 socket.on('chatHistory', messages => {
     let list = '';
     messages.forEach(message => {
-        let hour = new Date(message.sendAt).getHours();
-        let minute = new Date(message.sendAt).getMinutes();
+        let hours = new Date(message.sendAt).getHours();
+        hours = hours < 10 ? '0' + hours : hours;
+        let minutes = new Date(message.sendAt).getMinutes();
+        minutes = minutes < 10 ? '0' + minutes : minutes;
         let direction = socket.id == message.userId ? 'right' : 'left';
 
         list += `
         <div class="message ${direction}">
             <div class="user-name">${message.userName}</div>
             <div class="user-msg">${message.message}</div>
-            <div class="time">${hour}:${minute}</div>
+            <div class="time">${hours}:${minutes}</div>
         </div>
         `
     });
@@ -66,18 +76,21 @@ sendBtn.addEventListener('click', () => {
 });
 socket.on('chat', message => {
     feedbackScreen.innerHTML = '';
-
-    let hour = new Date(message.sendAt).getHours();
-    let minute = new Date(message.sendAt).getMinutes();
+    let hours = new Date(message.sendAt).getHours();
+    hours = hours < 10 ? '0' + hours : hours;
+    let minutes = new Date(message.sendAt).getMinutes();
+    minutes = minutes < 10 ? '0' + minutes : minutes;
     let direction = socket.id == message.userId ? 'right' : 'left';
 
     messageScreen.innerHTML += `
     <div class="message ${direction}">
         <div class="user-name">${message.userName}</div>
         <div class="user-msg">${message.message}</div>
-        <div class="time">${hour}:${minute}</div>
+        <div class="time">${hours}:${minutes}</div>
     </div>
     `
+    const aud = new Audio('../audio/notfication.mp3');
+    aud.play();
 });
 
 //! Feedback Data Flow
@@ -96,4 +109,3 @@ socket.on('feedback', user => {
 socket.on('clear', () => {
     feedbackScreen.innerHTML = '';
 });
-

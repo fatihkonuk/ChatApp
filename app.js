@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const socket = require('socket.io');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const methodOverride = require('method-override');
 
 const Message = require('./models/Message');
 const User = require('./models/User');
@@ -23,6 +24,10 @@ mongoose.connect('mongodb://127.0.0.1:27017/chatapp-db').then(() => {
 //* Routes
 const pageRoute = require('./routes/pageRoute');
 const authRoute = require('./routes/authRoute');
+const adminRoute = require('./routes/adminRoute');
+
+//* User Middlewares
+const roleMiddleware = require('./middlewares/roleMiddleware');
 
 //* Template Engine
 app.set('view engine', 'ejs');
@@ -37,6 +42,9 @@ app.use(session({
     saveUninitialized: true,
     store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/chatapp-db' })
 }));
+app.use(methodOverride('_method', {
+    methods: ['POST', 'GET'],
+}));
 
 //* Global Variable
 global.userIN = null;
@@ -45,21 +53,23 @@ app.use('*', (req,res,next) => {
     global.userIN = req.session.userID;
     next();
 })
-app.use(pageRoute);
+app.use('/admin', roleMiddleware, adminRoute);
 app.use('/users', authRoute);
+app.use('/', pageRoute);
 
 //* Socket.io
 io.on('connection', async socket => {
     //* Set Socket Id
     socket.id = global.userIN;
     socket.emit('id', socket.id);
+
     const user = await User.findById(socket.id);
     if (user) {
         user.isOnline = true;
         await user.save();
     }
 
-    //* Get Online Users
+    //* Send Online Users
     const users = await User.find();
     io.sockets.emit('onlineUsers', users);
 
@@ -71,7 +81,7 @@ io.on('connection', async socket => {
         },1000);
     })
 
-    //* Get Chat History
+    //* Send Chat History
     const messages = await Message.find().sort('sendAt');
     socket.emit('chatHistory', messages);
 
@@ -108,6 +118,5 @@ io.on('connection', async socket => {
         const users = await User.find();
         io.sockets.emit('onlineUsers', users);
     });
-
 }); 
 

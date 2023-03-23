@@ -39,9 +39,18 @@ const getVerifyPage = async (req,res) => {
     });
 }
 
+const getProfilePage = async (req,res) => {
+    const user = await User.findById(req.session.userID);
+    res.render('profile', {
+        user,
+        page_name: 'profile'
+    });
+}
+
 module.exports = {
     createUser,
     loginUser,
     logoutUser,
     getVerifyPage,
+    getProfilePage,
 }

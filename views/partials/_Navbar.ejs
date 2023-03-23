@@ -1,14 +1,24 @@
-<nav class="navbar navbar-dark bg-dark px-5">
-    <div class="container-fluid">
-      <a href="/" class="navbar-brand text-white">ChatApp</a>
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+<nav class="navbar navbar-expand navbar-dark bg-dark px-5">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">ChatApp</a>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link <%= page_name == 'chat' && 'active' %>" aria-current="page" href="/">Chat</a>
+      </li>
+      <% if (user.role == 'admin') { %>
+        <li class="nav-item">
+          <a class="nav-link <%= page_name== 'dashboard' && 'active' %>" href="/admin" aria-current="page"">Dashboard</a>
+        </li>
+      <% } %>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle <%= page_name == 'profile' && 'active' %>" role="button" data-bs-toggle="dropdown" aria-expanded="false">
           <%= user.name %>
-        </button>
+        </a>
         <ul class="dropdown-menu dropdown-menu-dark">
-          <li><a class="dropdown-item" href="/<%= user.slug %>">Profile</a></li>
-          <li><a href="/users/logout"><button class="dropdown-item" onclick="setOffline()" >Logout</button></a></li>
+          <li><a class="dropdown-item" href="/users/<%= user.slug %>">Profile</a></li>
+          <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
         </ul>
-      </div>
-    </div>
+      </li>
+    </ul>
+  </div>
 </nav>

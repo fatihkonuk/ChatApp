@@ -11,11 +11,11 @@
     <%- include('./partials/_Navbar.ejs') %>
 
     <div class="content container-fluid pt-4">
-        <div class="row align-items-center justify-content-around">
+        <div class="row align-items-start justify-content-around">
 
             <!--? Online Users -->
-            <div class="box user-list col-3">
-                <div class="header"><h4>Online Users</h4></div>
+            <div class="box user-list col-md-3 col-10 order-md-1 order-2 mb-md-0 mb-5">
+                <div class="header"><h4>Users</h4></div>
                 <ul id="online-users" class="list-group ">
                     <% users.forEach(u => { %>
                         <% if (u.isOnline) { %>
@@ -32,7 +32,7 @@
             </div>
 
             <!--? Screen -->
-            <div class="box chat-screen col-5">
+            <div class="box chat-screen  col-md-5 col-10 order-md-2 order-1 mb-md-0 mb-5">
                 <div class="header"><h4>Chat</h4></div>
                 <div id="screen" class="screen">
                     <div id="messages">
@@ -56,14 +56,14 @@
             </div>
 
             <!--? User Panel -->
-            <div class="box user-panel col-3">
-                <div class="header"><h4>User Panel</h4></div>
+            <div class="box user-panel col-md-3 col-10 order-md-3 order-3 mb-md-0 mb-5">
+                <div class="header"><h4>Rooms</h4></div>
                 <button>Room 1</button>
                 <button>Room 2</button>
             </div>
         </div>
-        
     </div>
+
     <script src="/js/main.js"></script>
 </body>
 </html>
