@@ -17,7 +17,7 @@ const server = app.listen(port, () => {
 const io = socket(server);
 
 //* Database Connection
-mongoose.connect('mongodb://127.0.0.1:27017/chatapp-db').then(() => {
+mongoose.connect('mongodb+srv://fatihkonuk000:x52JSMknXLL3TeFc@cluster0.ed4ho5b.mongodb.net/?retryWrites=true&w=majority').then(() => {
     console.log('Database Connected');
 });
 
@@ -40,7 +40,7 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: 'mongodb://127.0.0.1:27017/chatapp-db' })
+    store: MongoStore.create({ mongoUrl: 'mongodb+srv://fatihkonuk000:x52JSMknXLL3TeFc@cluster0.ed4ho5b.mongodb.net/?retryWrites=true&w=majority' })
 }));
 app.use(methodOverride('_method', {
     methods: ['POST', 'GET'],
