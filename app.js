@@ -53,6 +53,7 @@ app.use('*', (req,res,next) => {
     global.userIN = req.session.userID;
     next();
 })
+
 app.use('/admin', roleMiddleware, adminRoute);
 app.use('/users', authRoute);
 app.use('/', pageRoute);
@@ -113,10 +114,38 @@ io.on('connection', async socket => {
         const user = await User.findById(socket.id);
         if (user) {
             user.isOnline = false;
+            user.isStream = true;
             await user.save();
         }
         const users = await User.find();
         io.sockets.emit('onlineUsers', users);
     });
+
+
+
+    //! Deneme
+    // socket.on('join-stream', async (stream) => {
+    //     const user = await User.findById(socket.id);
+    //     if (user) {
+    //         user.isStream = true;
+    //         await user.save();
+    //     }
+    //     const users = await User.find({isStream: true});
+    //     // io.sockets.emit('user-connected', users);
+    //     io.sockets.emit('user-connected',  {
+    //         userId: user._id,
+    //         stream
+    //     });
+    // })
+
+    // socket.on('leave-stream', async () => {
+    //     const user = await User.findById(socket.id);
+    //     if (user) {
+    //         user.isStream = false;
+    //         await user.save();
+    //     }
+    //     const users = await User.find({isStream: true});
+    //     io.sockets.emit('user-connected', users);
+    // })
 }); 
 

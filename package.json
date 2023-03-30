@@ -4,7 +4,7 @@
   "description": "Chat App",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "keywords": [
     "chat",
@@ -22,6 +22,7 @@
     "mongoose": "^7.0.2",
     "nodemailer": "^6.9.1",
     "slugify": "^1.6.5",
-    "socket.io": "^4.6.1"
+    "socket.io": "^4.6.1",
+    "uuid": "^9.0.0"
   }
 }

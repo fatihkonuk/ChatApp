@@ -34,6 +34,10 @@ const UserSchema = new Schema({
     isOnline: {
         type: Boolean,
         default: false,
+    },
+    isStream: {
+        type: Boolean,
+        default: false,
     }
 });
 

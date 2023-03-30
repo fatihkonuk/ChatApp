@@ -19,6 +19,15 @@ const getSignupPage = (req,res) => {
 }
 
 
+// //! Deneme
+// const {v4: uuidV4 } = require('uuid');
+// const getVideoPage = (req,res) => {
+//     res.redirect(`/video/${uuidV4()}`);
+// }
+// const getRoomPage = (req,res) => {
+//     res.render('video', { roomId: req.params.room});
+// }
+
 
 module.exports = {
     getHomePage,

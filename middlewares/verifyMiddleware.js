@@ -6,7 +6,7 @@ const sendCode = async (req,res,next) => {
             service: 'gmail',
             auth: {
               user: "no1.fatih@gmail.com",
-              pass: "jpzmvnanbqtyapis",
+              pass: "rslftqlafzkuvfxw",
             },
         });
         const code = Math.floor(Math.random() * (10000 - 1000)) + 1000;

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script>
+        const ROOM_ID = '<%= roomId %>';
+    </script>
+
+    <!--? Socket.io JS  -->
+    <script src="/socket.io/socket.io.js" defer></script>
+    <script src="/js/video.js" defer></script>
+
+    
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        canvas {
+            position: absolute;
+        }
+        video {
+            box-shadow: -2px 12px 20px 0px grey;
+        }
+        #video-grid {
+            /* display: flex;
+            align-items: center;
+            justify-content: flex-start; */
+        }
+        video.right {
+            float: right;
+            filter: blur(5px);
+        }
+    </style>
+</head>
+<body>
+    <div id="video-grid">
+
+    </div>
+
+    <button onclick="joinStream()">Join</button>
+    <button onclick="leaveStream()">Leave</button>
+</body>
+</html>
